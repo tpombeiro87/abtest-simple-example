@@ -1,30 +1,69 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
+import getActiveAbTestsFromSplit from './lib/get-active-ab-tests-from-split'
+import ErrorBoundary from './components/error-boundary'
 import Header from './components/header'
-import HighOrderComponentExample from './examples/high-order-component'
-import ReduxSelectorExample from './examples/redux-selector'
-import Info from './info'
-import NoMatch from './no-match'
+import LoadingSpiner from './components/loading-spiner'
+import PAGES from './pages'
+import { APP_STATUS_LOADING, APP_STATUS_READY } from './lib/constants'
+import { loadActiveAbTests as loadActiveAbTestsAction } from './redux/actions'
 
-const PAGES = [
-  { url: '/hoc', component: HighOrderComponentExample, title: 'High order component' },
-  { url: '/redux-selector', component: ReduxSelectorExample, title: 'Redux Selector' },
-  { url: '/info', component: Info, title: 'Info' },
-  { url: '/', component: Info },
-]
+export const ActiveAbTestsContext = React.createContext({})
 
-const App = () =>
-  <Router>
-    <Header pages={PAGES}/>
+class App extends Component {
+  state = {
+    activeAbTests: {},
+  }
 
-    <Switch>
-      { PAGES.map(page =>
-        <Route component={page.component} exact key={page.url} path={page.url} />
-      )}
-      <Route component={NoMatch} />
-    </Switch>
+  componentDidMount () {
+    getActiveAbTestsFromSplit()
+      .then(activeAbTests => {
+        this.props.loadActiveAbTests(activeAbTests)
+        this.setState({ activeAbTests })
+      })
+  }
 
-  </Router>
+  render () {
+    const { appStatus } = this.props
+    const appStatusBehaviour = {
+      [APP_STATUS_LOADING]: <LoadingSpiner />,
+      [APP_STATUS_READY]: (
+        <Switch>
+          { PAGES.map(page =>
+            <Route component={page.component} exact key={page.url} path={page.url} />
+          )}
+          <Redirect to='/404' />
+        </Switch>
+      ),
+    }
 
-export default App
+    return (
+      <ActiveAbTestsContext.Provider value={this.state.activeAbTests}>
+        <Router>
+          <Header pages={PAGES}/>
+          <ErrorBoundary>
+            { appStatusBehaviour[appStatus] }
+          </ErrorBoundary>
+        </Router>
+      </ActiveAbTestsContext.Provider>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return { appStatus: state.appStatus }
+}
+
+const mapDispatchToProps = {
+  loadActiveAbTests: loadActiveAbTestsAction,
+}
+
+App.propTypes = {
+  appStatus: PropTypes.string,
+  loadActiveAbTests: PropTypes.func,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

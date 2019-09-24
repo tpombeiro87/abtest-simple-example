@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Transition } from 'react-transition-group'
 
 import { compactVersionMediaQuery, wideVersionMediaQuery } from '../../lib/responsive-utils'
+import ActiveTestsListing from '../active-tests-listing'
 
 import NavLink from './nav-link'
 import HamburguerMenu from './hamburguer-menu'
@@ -58,7 +59,7 @@ const Navigation = ({ hamburguerMenuOpen, onToggleHamburguerMenu, pages }) => (
       { elementState =>
         <LinksWrapper elementState={elementState} hamburguerMenuOpen={hamburguerMenuOpen}>
           { pages
-            .filter(page => page.url !== '/')
+            .filter(page => page.showInMenu)
             .map(({ title, url }) =>
               <NavLink
                 key={url}
@@ -67,6 +68,7 @@ const Navigation = ({ hamburguerMenuOpen, onToggleHamburguerMenu, pages }) => (
                 url={url} />
             )
           }
+          <ActiveTestsListing />
         </LinksWrapper>
       }
     </Transition>

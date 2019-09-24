@@ -4,9 +4,6 @@ import styled from 'styled-components'
 import { Link, withRouter } from 'react-router-dom'
 
 const InnerLink = styled(Link)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   margin-right: 10px;
   width: 100%;
   text-decoration-line: none;

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import Spacer from '../components/spacer'
 
-const AlignCenter = styled.div`
+export const AlignCenter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
