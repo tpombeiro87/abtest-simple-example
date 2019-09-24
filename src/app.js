@@ -18,6 +18,7 @@ class App extends Component {
     activeAbTests: {},
   }
 
+  // Using class component because the split api should only be called once and the useEfect is triggered multiple times
   componentDidMount () {
     getActiveAbTestsFromSplit()
       .then(activeAbTests => {
