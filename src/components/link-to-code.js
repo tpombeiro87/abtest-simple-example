@@ -12,7 +12,7 @@ const TextWrapper = styled.div`
 
 const LinkToCode = ({ codeFileName }) =>
   <TextWrapper>
-    <p>Check the code <a href={`${GIT_PROJECT_URL}/blob/master/src/examples/${codeFileName}.js`} rel='noopener noreferrer' target='_blank'>here</a></p>
+    <p>Check the code <a href={`${GIT_PROJECT_URL}/blob/master/src/pages/${codeFileName}.js`} rel='noopener noreferrer' target='_blank'>here</a></p>
   </TextWrapper>
 
 LinkToCode.propTypes = {

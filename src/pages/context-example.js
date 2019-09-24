@@ -10,7 +10,7 @@ import { ActiveAbTestsContext } from '../app'
 
 const ContextExample = () =>
   <ActiveAbTestsContext.Consumer>
-    { ({ activeAbTests }) =>
+    { (activeAbTests) =>
       <Layout title='CONTEXT EXAMPLE'>
         {
           activeAbTests[AB_TEST_ADOPTION_INCREASE_IMG] === AB_TEST_VARIANT

@@ -22,6 +22,7 @@ class App extends Component {
     getActiveAbTestsFromSplit()
       .then(activeAbTests => {
         this.props.loadActiveAbTests(activeAbTests)
+        // Using the state here so we can showcase the context usage
         this.setState({ activeAbTests })
       })
   }
