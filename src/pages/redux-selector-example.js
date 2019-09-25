@@ -12,7 +12,7 @@ const ReduxSelectorExample = () => {
   const activeAbTests = useSelector(state => state.activeAbTests)
 
   return (
-    <Layout title='REDUX SELECTOR EXAMPLE'>
+    <Layout title='Generate Happy Tails - Adopt Today'>
       {
         activeAbTests[AB_TEST_ADOPTION_INCREASE_IMG] === AB_TEST_VARIANT
           ? <Image src='/dog.jpg' />
@@ -24,7 +24,7 @@ const ReduxSelectorExample = () => {
           ? <Cta href='https://www.protectorabcn.es/' text='Support adoption!'/>
           : <Cta href='https://www.protectorabcn.es/' text='Click here to support adoption!'/>
       }
-      <LinkToCode codeFileName='redux-selector-example' />
+      <LinkToCode codeFileName='redux-selector-example' title='Redux Selector Example' />
     </Layout>
   )
 }

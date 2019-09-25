@@ -18,7 +18,7 @@ const HocExample = () => {
   const activeAbTests = useSelector(state => state.activeAbTests)
 
   return (
-    <Layout title='HIGH ORDER COMPONENT EXAMPLE'>
+    <Layout title='Generate Happy Tails - Adopt Today'>
       <Hoc abTest={AB_TEST_ADOPTION_INCREASE_IMG} abTests={activeAbTests} variants={[AB_TEST_VARIANT]}>
         <Image src='/dog.jpg' />
       </Hoc>
@@ -36,7 +36,7 @@ const HocExample = () => {
         <Cta href='https://www.protectorabcn.es/' text='Click here to support adoption!'/>
       </Hoc>
 
-      <LinkToCode codeFileName='hoc-example' />
+      <LinkToCode codeFileName='hoc-example' title='High Order Component Example' />
     </Layout>
   )
 }
