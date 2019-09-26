@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import Image from '../components/image'
 import Cta from '../components/cta'
@@ -8,24 +8,24 @@ import LinkToCode from '../components/link-to-code'
 import { AB_TEST_ADOPTION_INCREASE_IMG, AB_TEST_ADOPTION_INCREASE_CTA, AB_TEST_VARIANT } from '../lib/constants'
 import { ActiveAbTestsContext } from '../app'
 
-const ContextExample = () => {
-  const activeAbTests = useContext(ActiveAbTestsContext)
-  return (
-    <Layout title='Generate Happy Tails - Adopt Today'>
-      {
-        activeAbTests[AB_TEST_ADOPTION_INCREASE_IMG] === AB_TEST_VARIANT
-          ? <Image src='/dog.jpg' />
-          : <Image src='/cat.jpg' />
-      }
-      <Spacer top={1} />
-      {
-        activeAbTests[AB_TEST_ADOPTION_INCREASE_CTA] === AB_TEST_VARIANT
-          ? <Cta href='https://www.protectorabcn.es/' text='Support adoption!'/>
-          : <Cta href='https://www.protectorabcn.es/' text='Click here to support adoption!'/>
-      }
-      <LinkToCode codeFileName='redux-selector-example' title='Context Example' />
-    </Layout>
-  )
-}
+const ContextExample = () =>
+  <ActiveAbTestsContext.Consumer>
+    { (activeAbTests) =>
+      <Layout title='Generate Happy Tails - Adopt Today'>
+        {
+          activeAbTests[AB_TEST_ADOPTION_INCREASE_IMG] === AB_TEST_VARIANT
+            ? <Image src='/dog.jpg' />
+            : <Image src='/cat.jpg' />
+        }
+        <Spacer top={1} />
+        {
+          activeAbTests[AB_TEST_ADOPTION_INCREASE_CTA] === AB_TEST_VARIANT
+            ? <Cta href='https://www.protectorabcn.es/' text='Support adoption!'/>
+            : <Cta href='https://www.protectorabcn.es/' text='Click here to support adoption!'/>
+        }
+        <LinkToCode codeFileName='redux-selector-example' title='Context Example' />
+      </Layout>
+    }
+  </ActiveAbTestsContext.Consumer>
 
 export default ContextExample
