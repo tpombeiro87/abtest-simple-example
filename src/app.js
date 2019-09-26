@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import getActiveAbTestsFromSplit from './lib/get-active-ab-tests-from-split'
+import getActiveAbTestsFromSplit from './transport/get-active-ab-tests-from-split'
 import ErrorBoundary from './components/error-boundary'
 import Header from './components/header'
 import LoadingSpiner from './components/loading-spiner'

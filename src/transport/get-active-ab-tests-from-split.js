@@ -1,7 +1,7 @@
 import { SplitFactory } from '@splitsoftware/splitio'
 
-import { getUserId } from './attribution-util'
-import { ACTIVE_AB_TESTS } from './constants'
+import { getUserId } from '../lib/attribution-util'
+import { ACTIVE_AB_TESTS } from '../lib/constants'
 
 const sdkFactory = SplitFactory({
   core: {
