@@ -15,7 +15,7 @@ const Hoc = ({ abTest, abTests, variants, children }) => {
 }
 
 const HocExample = () => {
-  const activeAbTests = useSelector(state => state.activeAbTests)
+  const activeAbTests = useSelector(state => state.activeAbTests, [])
 
   return (
     <Layout title='Generate Happy Tails - Adopt Today'>
